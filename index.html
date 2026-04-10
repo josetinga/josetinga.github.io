@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Engineer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111a2e;
+      --accent: #38bdf8;
+      --accent2: #22c55e;
+      --text: #e6edf3;
+      --muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      color: var(--text);
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .hero-buttons a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      color: white;
+    }
+
+    .skills span {
+      display: inline-block;
+      background: #1e293b;
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      margin: 0.3rem;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+    }
+
+    .tag {
+      color: var(--accent2);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>JOSE CARLO TIN-GA</h1>
+    <p class="subtitle">Cloud Engineer | Networking | Automation | AWS</p>
+
+    <div class="hero-buttons">
+      <a href="https://www.linkedin.com/in/jose-carlo-tin-ga-a148b41a4/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/josetinga" target="_blank">GitHub</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="grid">
+
+      <div class="card">
+        <h2>☁️ About Me</h2>
+        <p>
+          I am an aspiring Cloud Engineer transitioning from hands-on networking and system administration into cloud infrastructure and automation.
+        </p>
+        <p>
+          I build labs and real-world projects focused on AWS, networking, and troubleshooting to strengthen my technical foundation.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>🛠 Skills</h2>
+        <div class="skills">
+          <span>Networking (CCNA)</span>
+          <span>AWS</span>
+          <span>Linux</span>
+          <span>Python</span>
+          <span>Automation</span>
+          <span>Troubleshooting</span>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 style="margin-top:2rem;">💻 Projects</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Network Lab (CCNA)</h3>
+        <p>Multi-VLAN, HSRP, routing and failover lab.</p>
+        <a href="https://github.com/josetinga/enterprise-network-lab">View Project</a>
+        <div class="tag">Networking</div>
+      </div>
+
+      <div class="card">
+        <h3>AWS Deployment (In-Progress)</h3>
+        <p>Deployed scalable cloud infrastructure using EC2 and VPC.</p>
+        <a href="https://github.com/josetinga/cloud-engineering-portfolio">View Project</a>
+        <div class="tag">Cloud</div>
+      </div>
+
+      <div class="card">
+        <h3>Automation Script (In-Progress)</h3>
+        <p>Python-based automation for system tasks and configs.</p>
+        <a href="#">View Project</a>
+        <div class="tag">Automation</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Built with HTML & CSS • Cloud Engineer Portfolio</p>
+  </footer>
+
+</body>
+</html>
