@@ -113,9 +113,10 @@
 }
 
 #github-projects .card {
-  background: #1e293b;
-  padding: 1.2rem;
-  border-radius: 16px;
+  background: var(--card);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -178,30 +179,34 @@
 
     <h2 style="margin-top:2rem;">💻 Projects</h2>
 
-    <div class="grid">
+<div class="grid">
+  <!-- Featured projects (manual) -->
 
-      <div class="card">
-        <h3>Network Lab (CCNA)</h3>
-        <p>Multi-VLAN, HSRP, routing and failover lab.</p>
-        <a href="https://github.com/josetinga/enterprise-network-lab">View Project</a>
-        <div class="tag">Networking</div>
-      </div>
+  <div class="card">
+    <h3>Network Lab (CCNA)</h3>
+    <p>Multi-VLAN, HSRP, routing and failover lab.</p>
+    <a href="https://github.com/josetinga/enterprise-network-lab">View Project</a>
+    <div class="tag">Networking</div>
+  </div>
 
-      <div class="card">
-        <h3>AWS Deployment (In-Progress)</h3>
-        <p>Deployed scalable cloud infrastructure using EC2 and VPC.</p>
-        <a href="https://github.com/josetinga/cloud-engineering-portfolio">View Project</a>
-        <div class="tag">Cloud</div>
-      </div>
+  <div class="card">
+    <h3>AWS Deployment (In-Progress)</h3>
+    <p>Deployed scalable cloud infrastructure using EC2 and VPC.</p>
+    <a href="https://github.com/josetinga/cloud-engineering-portfolio">View Project</a>
+    <div class="tag">Cloud</div>
+  </div>
 
-      <div class="card">
-        <h3>Automation Script (In-Progress)</h3>
-        <p>Python-based automation for system tasks and configs.</p>
-        <a href="#">View Project</a>
-        <div class="tag">Automation</div>
-      </div>
-      <div id="github-projects"></div>
-    </div>
+  <div class="card">
+    <h3>Automation Script (In-Progress)</h3>
+    <p>Python-based automation for system tasks and configs.</p>
+    <a href="#">View Project</a>
+    <div class="tag">Automation</div>
+  </div>
+</div>
+
+<h3 style="margin-top:2rem;">Other Projects</h3>
+
+<div id="github-projects" class="grid"></div>
 
   </div>
 
@@ -212,25 +217,50 @@
 async function loadGitHubRepos() {
   const username = "josetinga";
   const response = await fetch(`https://api.github.com/users/${username}/repos`);
-  const repos = await response.json();
+  let repos = await response.json();
 
   const container = document.getElementById("github-projects");
 
-  // Clear anything inside (optional safety)
   container.innerHTML = "";
 
+  // FILTER (only show relevant projects)
+  repos = repos
+    .filter(repo => !repo.fork)
+    .filter(repo => !repo.name.includes("github.io"))
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
   repos.forEach(repo => {
+
+    // TAG LOGIC (auto assign)
+    let tag = "Project";
+
+    if (repo.name.includes("aws") || repo.description?.toLowerCase().includes("aws")) {
+      tag = "Cloud";
+    } else if (repo.name.includes("network")) {
+      tag = "Networking";
+    } else if (repo.name.includes("auto") || repo.name.includes("script")) {
+      tag = "Automation";
+    }
+
     const project = document.createElement("div");
     project.className = "card";
 
     project.innerHTML = `
-      <h3>${repo.name}</h3>
+      <h3>${formatTitle(repo.name)}</h3>
       <p>${repo.description || "No description available"}</p>
       <a href="${repo.html_url}" target="_blank">View Project</a>
+      <div class="tag">${tag}</div>
     `;
 
     container.appendChild(project);
   });
+}
+
+// CLEAN TITLE (makes repo names look nice)
+function formatTitle(name) {
+  return name
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, c => c.toUpperCase());
 }
 
 loadGitHubRepos();
